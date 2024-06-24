@@ -6,7 +6,7 @@ import { CastVoteDto } from './dtos/castVote.dto';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) { }
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   getHello(): string {
@@ -38,7 +38,6 @@ export class AppController {
     return { result: await this.appService.getTransactionReceipt(hash) };
   }
 
-
   @Get('server-wallet-address')
   async getServerWalletAddress() {
     return { result: await this.appService.getServerWalletAddress() };
@@ -54,7 +53,6 @@ export class AppController {
     return { result: await this.appService.mintTokens(body.address) };
   }
 
-
   @Post('vote-delegate')
   async voteDelegate(@Body() body: voteDelegateDto) {
     return { result: await this.appService.voteDelegate(body.address) };
@@ -62,12 +60,13 @@ export class AppController {
 
   @Post('cast-vote')
   async castVote(@Body() body: CastVoteDto) {
-    return { result: await this.appService.castVote(body.proposal, body.amount) };
+    return {
+      result: await this.appService.castVote(body.proposal, body.amount),
+    };
   }
 
   @Get('get-winning-proposal')
   async getWinninProposal() {
     return { result: await this.appService.getWinningProposal() };
   }
-
 }
